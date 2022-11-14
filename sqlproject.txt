@@ -1,0 +1,251 @@
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Users\gunaseeian>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 201
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use hotel;
+Database changed
+MariaDB [hotel]> show tables;
++-----------------+
+| Tables_in_hotel |
++-----------------+
+| booking         |
+| customer        |
+| hotel           |
+| room            |
++-----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [hotel]> select * from customer;
++---------+-------------+-----------------+--------------+--------+
+| GuestNo | GuestName   | GuestAddress    | Guestphoneno | Gender |
++---------+-------------+-----------------+--------------+--------+
+|       1 | sri         | no4 raj street  |   8967540987 | M      |
+|       2 | danushkumar | no6 mani street |   8765903478 | M      |
+|       3 | suresh      | n03 sai street  |   9087654312 | M      |
+|       4 | naveen      | no8 bany street |   9867543487 | M      |
+|       5 | jaya        | no5             |   8909896705 | F      |
+|       6 | lakhsmi     | no2 sri street  |   9709870956 | F      |
++---------+-------------+-----------------+--------------+--------+
+6 rows in set (0.001 sec)
+
+MariaDB [hotel]> select * from booking;
++-----------+---------+--------+------------+------------+
+| BookingID | GuestNo | RoomNo | Date From  | Date To    |
++-----------+---------+--------+------------+------------+
+|      1001 |       1 |    100 | 2022-07-01 | 0000-00-00 |
+|      1002 |       2 |    101 | 2022-07-20 | 2022-08-01 |
+|      1003 |       3 |    103 | 2022-08-01 | 2022-08-10 |
+|      1004 |       4 |    104 | 2022-07-07 | 0000-00-00 |
+|      1005 |       5 |    105 | 2022-06-10 | 2022-07-06 |
+|      1006 |       6 |    106 | 2022-08-08 | 0000-00-00 |
++-----------+---------+--------+------------+------------+
+6 rows in set (0.001 sec)
+
+MariaDB [hotel]> select * from room;
++--------+---------+------------+-----------+
+| RoomNo | HotelNo | RoomType   | RoomPrice |
++--------+---------+------------+-----------+
+|    101 |     501 | single bed |     10000 |
+|    102 |     502 | dubble bed |     12000 |
+|    103 |     503 | single bed |     11000 |
+|    104 |     504 | single bad |     12000 |
+|    105 |     505 | single bed |     10000 |
+|    106 |     506 | singl bed  |     10500 |
++--------+---------+------------+-----------+
+6 rows in set (0.001 sec)
+
+MariaDB [hotel]> select * from hotel;
++---------+-----------+---------------------+-----------+------------+---------------+
+| HotelNo | HotelName | Hoteladdress        | HotelCity | HotelState | HotelPostcode |
++---------+-----------+---------------------+-----------+------------+---------------+
+|     501 | STR hotel | no1 mani street     | chennai   | tamilnadu  |         60001 |
+|     502 | STR hotel | no1 mani street     | chennai   | tamilnadu  |         60001 |
+|     503 | SRI hotel | no7  venkate street | ambur     | tamilnadu  |         60002 |
+|     504 | KGF hotel | no5 suresh street   | vellor    | tamilnadu  |         60005 |
+|     505 | KGF hotel | no5 suresh street   | vellore   | tamilnadu  |         60005 |
+|     506 | SAi hotel | no4 raja street     | ambur     | tamilnadu  |         60002 |
++---------+-----------+---------------------+-----------+------------+---------------+
+6 rows in set (0.001 sec)
+
+MariaDB [hotel]> rename table customer to guest;
+Query OK, 0 rows affected (0.177 sec)
+
+MariaDB [hotel]> select* from guest;
++---------+-------------+-----------------+--------------+--------+
+| GuestNo | GuestName   | GuestAddress    | Guestphoneno | Gender |
++---------+-------------+-----------------+--------------+--------+
+|       1 | sri         | no4 raj street  |   8967540987 | M      |
+|       2 | danushkumar | no6 mani street |   8765903478 | M      |
+|       3 | suresh      | n03 sai street  |   9087654312 | M      |
+|       4 | naveen      | no8 bany street |   9867543487 | M      |
+|       5 | jaya        | no5             |   8909896705 | F      |
+|       6 | lakhsmi     | no2 sri street  |   9709870956 | F      |
++---------+-------------+-----------------+--------------+--------+
+6 rows in set (0.002 sec)
+
+MariaDB [hotel]> update guest set guestname='lokesh' where guestno=3;
+Query OK, 1 row affected (0.085 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [hotel]> select* from guest;
++---------+-------------+-----------------+--------------+--------+
+| GuestNo | GuestName   | GuestAddress    | Guestphoneno | Gender |
++---------+-------------+-----------------+--------------+--------+
+|       1 | sri         | no4 raj street  |   8967540987 | M      |
+|       2 | danushkumar | no6 mani street |   8765903478 | M      |
+|       3 | lokesh      | n03 sai street  |   9087654312 | M      |
+|       4 | naveen      | no8 bany street |   9867543487 | M      |
+|       5 | jaya        | no5             |   8909896705 | F      |
+|       6 | lakhsmi     | no2 sri street  |   9709870956 | F      |
++---------+-------------+-----------------+--------------+--------+
+6 rows in set (0.000 sec)
+
+MariaDB [hotel]> select guestname as 'customername' from guest;
++--------------+
+| customername |
++--------------+
+| sri          |
+| danushkumar  |
+| lokesh       |
+| naveen       |
+| jaya         |
+| lakhsmi      |
++--------------+
+6 rows in set (0.001 sec)
+
+MariaDB [hotel]> select distinct hotelcity from hotel;
++-----------+
+| hotelcity |
++-----------+
+| chennai   |
+| ambur     |
+| vellor    |
+| vellore   |
++-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [hotel]> select * from guest
+    -> where guestname like'l%';
++---------+-----------+----------------+--------------+--------+
+| GuestNo | GuestName | GuestAddress   | Guestphoneno | Gender |
++---------+-----------+----------------+--------------+--------+
+|       3 | lokesh    | n03 sai street |   9087654312 | M      |
+|       6 | lakhsmi   | no2 sri street |   9709870956 | F      |
++---------+-----------+----------------+--------------+--------+
+2 rows in set (0.001 sec)
+
+MariaDB [hotel]> select  guestname
+    -> from guest
+    -> order by guestname desc;
++-------------+
+| guestname   |
++-------------+
+| sri         |
+| naveen      |
+| lokesh      |
+| lakhsmi     |
+| jaya        |
+| danushkumar |
++-------------+
+6 rows in set (0.001 sec)
+
+MariaDB [hotel]> select  guestname
+    -> from guest
+    -> order by guestname asc;
++-------------+
+| guestname   |
++-------------+
+| danushkumar |
+| jaya        |
+| lakhsmi     |
+| lokesh      |
+| naveen      |
+| sri         |
++-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [hotel]> select guestname, datefrom, dateto
+    -> from guest, booking
+    -> where guest.guestno=booking.guestno;
++-------------+------------+------------+
+| guestname   | datefrom   | dateto     |
++-------------+------------+------------+
+| sri         | 2022-07-01 | 0000-00-00 |
+| danushkumar | 2022-07-20 | 2022-08-01 |
+| lokesh      | 2022-08-01 | 2022-08-10 |
+| naveen      | 2022-07-07 | 0000-00-00 |
+| jaya        | 2022-06-10 | 2022-07-06 |
+| lakhsmi     | 2022-08-08 | 0000-00-00 |
++-------------+------------+------------+
+6 rows in set (0.001 sec)
+
+MariaDB [hotel]> create view gus as
+    -> select guestname,guestphoneno
+    -> from guest where guestno in (1,3,5,6);
+Query OK, 0 rows affected (0.080 sec)
+
+MariaDB [hotel]> select avg(roomprice) from room;
++----------------+
+| avg(roomprice) |
++----------------+
+|     10916.6667 |
++----------------+
+1 row in set (0.043 sec)
+
+MariaDB [hotel]> select sum(roomprice) from room;
++----------------+
+| sum(roomprice) |
++----------------+
+|          65500 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [hotel]> select max(roomprice) from room;
++----------------+
+| max(roomprice) |
++----------------+
+|          12000 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [hotel]> select min(roomprice) from room;
++----------------+
+| min(roomprice) |
++----------------+
+|          10000 |
++----------------+
+
+MariaDB [hotel]> select count(*) from room;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.001 sec)
+
+1 row in set (0.000 sec)
+
+
+MariaDB [hotel]> select * from gus;
++-----------+--------------+
+| guestname | guestphoneno |
++-----------+--------------+
+| sri       |   8967540987 |
+| lokesh    |   9087654312 |
+| jaya      |   8909896705 |
+| lakhsmi   |   9709870956 |
++-----------+--------------+
+4 rows in set (0.053 sec)
+
+MariaDB [hotel]> drop view gus;
+Query OK, 0 rows affected (0.001 sec)
