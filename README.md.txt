@@ -1,0 +1,1 @@
+In this Hotel Management project I am using for sql commands,views,joins and subquerys
